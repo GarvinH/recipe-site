@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from PIL import Image
 
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
@@ -17,3 +18,11 @@ class Recipe(models.Model):
 
     def get_absolute_url(self):
         return reverse('recipe-detail', kwargs={'pk': self.pk})
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.image.path)
+        if (img.height > 720 and img.width > 1280):
+            output_size = (1280, 720)
+            img.thumbnail(output_size)
+            img.save(self.image.path)

@@ -7,6 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 class RecipeListView(ListView):
     model = Recipe
     context_object_name = 'recipes'
+    paginate_by = 5
 
 class RecipeDetailView(DetailView):
     model = Recipe
