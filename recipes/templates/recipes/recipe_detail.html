@@ -7,8 +7,10 @@
         </div>
         <div class="mb-5">
             <h2 class="card-title">{{ recipe.title }}</h2>
+            {% if recipe.author == user %}
             <a class="btn btn-outline-primary" href="{% url 'recipe-update' recipe.pk %}">Update Recipe</a>
             <a class="btn btn-outline-danger" href="{% url 'recipe-delete' recipe.pk %}">Delete Recipe</a>
+            {% endif %}
         </div>
         <img src="{{ recipe.image.url }}">
         <div>
