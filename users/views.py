@@ -3,6 +3,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 def register(request):
     if (request.POST):
@@ -24,8 +25,17 @@ def profile(request, pkey):
 
 @login_required 
 def update_profile(request):
-    u_form = UserUpdateForm()
-    p_form = ProfileUpdateForm()
+    if (request.POST):
+            u_form = UserUpdateForm(request.POST, instance=request.user)
+            p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+            if (u_form.is_valid() and p_form.is_valid()):
+                u_form.save()
+                p_form.save()
+                messages.success(request, "Account successfully updated!")
+                return redirect(reverse('profile-posts', kwargs={'pkey': request.user.pk}))
+
+    u_form = UserUpdateForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,

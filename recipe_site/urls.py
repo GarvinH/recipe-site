@@ -25,7 +25,7 @@ urlpatterns = [
     path('register/', user_views.register, name="register"),
     path('login/', LoginView.as_view(template_name="users/login.html"), name='login'),
     path('logout', LogoutView.as_view(template_name="users/logout.html"), name='logout'),
-    path('profile/<pkey>', user_views.profile, name='profile-posts'),
+    path('profile/<int:pkey>', user_views.profile, name='profile-posts'),
     path('update_profile', user_views.update_profile, name='update_profile'),
     path('', include('recipes.urls'))
 ]

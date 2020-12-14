@@ -1,0 +1,23 @@
+{% extends "recipes/base.html" %}
+{% block content %}
+<div class="mt-5 mb-5 d-flex justify-content-center">
+    <div>
+        <div>
+        {{ recipe.author }} · {{ recipe.date_posted }}
+        </div>
+        <div class="mb-5">
+            <h2 class="card-title">{{ recipe.title }}</h2>
+            <a class="btn btn-outline-primary" href="{% url 'recipe-update' recipe.pk %}">Update Recipe</a>
+            <a class="btn btn-outline-danger" href="{% url 'recipe-delete' recipe.pk %}">Delete Recipe</a>
+        </div>
+        <img src="{{ recipe.image.url }}">
+        <div>
+        Prep Time: {{ recipe.prep_time }} minutes · Cook Time: {{ recipe.cook_time }}
+        </div>
+        <div class="mt-5">
+            <h2>Instructions</h2>
+            {{ recipe.instructions }}
+        </div>
+    </div>
+  </div>
+{% endblock %}

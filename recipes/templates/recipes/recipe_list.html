@@ -6,10 +6,10 @@
       {{ recipe.author }} · {{ recipe.date_posted }}
     </div>
     <div class="card-body">
-      <h2 class="card-title">{{ recipe.title }}</h2>
+      <h2 class="card-title"><a href="{% url 'recipe-detail' recipe.pk %}">{{ recipe.title }}</a></h2>
     </div>
     <div class="card-footer">
-      Prep Time: {{ recipe.prep_time }} minutes · Cook Time: {{ recipe.cook_time }}
+      Prep Time: {{ recipe.prep_time }} minutes · Cook Time: {{ recipe.cook_time }} minutes
     </div>
   </div>
 {% endfor %}
