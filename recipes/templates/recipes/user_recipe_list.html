@@ -1,9 +1,21 @@
 {% extends "recipes/base.html" %}
 {% block content %}
+<div class="row mt-5">
+    <img class="rounded-circle col-md-3" style="max-width: 150px !important; max-height: 150px !important;" src="{{ profile.image.url }}">
+    <div class="col-md-9">
+        <div>
+            <h2 style="display: inline-block; margin-right: 2rem;">{{ profile.user.username }}</h2>
+            {% if profile.user == user %}
+            <a href="{% url 'update_profile' %}" class="btn btn-outline-primary">Update Profile</a>
+            {% endif %}
+        </div>
+        <p>{{ profile.biography }}</p>
+    </div>
+</div>
 {% for recipe in recipes %}
 <div class="card mt-5 mb-5">
   <div class="card-header">
-    <a href="{% url 'user-recipe' recipe.author.username %}">{{ recipe.author }}</a> · {{ recipe.date_posted }}
+    {{ recipe.author }} · {{ recipe.date_posted }}
   </div>
   <div class="card-body">
     <h2 class="card-title"><a href="{% url 'recipe-detail' recipe.pk %}">{{ recipe.title }}</a></h2>

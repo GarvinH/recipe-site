@@ -6,6 +6,7 @@ urlpatterns = [
     path('post/<int:pk>/', views.RecipeDetailView.as_view(), name='recipe-detail'),
     path('post/<int:pk>/update/', views.RecipeUpdateView.as_view(), name='recipe-update'),
     path('post/<int:pk>/delete/', views.RecipeDeleteView.as_view(), name='recipe-delete'),
+    path('user-posts/<str:username>', views.UserRecipeListView.as_view(), name='user-recipe'),
     path('create-post/', views.RecipeCreateView.as_view(), name='recipe-create'),
     path('', views.RecipeListView.as_view(), name='recipe-home'),
 ]

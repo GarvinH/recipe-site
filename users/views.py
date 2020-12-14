@@ -17,9 +17,9 @@ def register(request):
         form = UserRegisterForm()
     return render(request, "users/register.html", {'form': form})
 
-def profile(request, pkey):
+def profile(request, username):
     context = {
-        'profile': User.objects.get(pk=pkey).profile
+        'profile': User.objects.get(username=username).profile
     }
     return render(request, "users/profile.html", context)
 
